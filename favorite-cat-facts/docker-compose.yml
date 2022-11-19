@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  # sqlite3:
+  #   image: mysql:5.7
+  #   volumes:
+  #     - cats-db:/backend/db/development.sqlite3
+  backend:
+    tty: true
+    build:
+      context: ./api/
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./api:/api
+      - cats-db:/backend/db/development.sqlite3
+    command: rails server -b 0.0.0.0
+  frontend:
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:3000"
+    volumes:
+      - ./frontend/:/frontend
+    command: 'yarn dev'
+volumes:
+  cats-db:
