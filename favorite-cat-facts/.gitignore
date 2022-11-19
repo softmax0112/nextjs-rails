@@ -39,7 +39,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-/frontendnext-env.d.ts
+/frontend/next-env.d.ts
 
 
 # BACKEND
