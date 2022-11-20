@@ -2,10 +2,9 @@ FROM ruby:3.1
 WORKDIR /api
 RUN set -eux && \
     apt-get update -qq && \
-    apt-get install -y \
-      postgresql-client
+    apt-get install -y
 
-COPY Gemfile Gemfile.lock* /api/
+COPY Gemfile Gemfile.lock* ./
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh

@@ -3,15 +3,15 @@ FROM node:14.6.0
 ENV PORT 3000
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir ./frontend
+WORKDIR /frontend
 
 # Installing dependencies
-COPY package*.json /usr/src/app/
+COPY ./package*.json ./frontend
 RUN yarn install
 
 # Copying source files
-COPY . /usr/src/app
+COPY ./yarn.lock ./frontend
 
 EXPOSE 3000
 
