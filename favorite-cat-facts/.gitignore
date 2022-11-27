@@ -15,6 +15,7 @@
 /frontend/coverage
 
 # next.js
+/.next/
 /frontend/.next/
 /frontend/out/
 
