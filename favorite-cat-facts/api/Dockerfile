@@ -1,14 +1,13 @@
-FROM ruby:3.1
+FROM ruby:3.1.2
+
+RUN mkdir /api
 WORKDIR /api
-RUN set -eux && \
-    apt-get update -qq && \
-    apt-get install -y
 
-COPY Gemfile Gemfile.lock* ./
+COPY ./Gemfile /api/Gemfile
+COPY ./Gemfile.lock /api/Gemfile.lock
 
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+ENV BUNDLER_VERSION=2.3.26
+RUN gem install bundler:2.3.26
+RUN bundle install
 
-# イメージ実行時に起動させる主プロセスを設定
-CMD ["rails", "server", "-p", "8080", "-b", "0.0.0.0"]
+CMD rm /api/tmp/pids/server.pid ; rails i
